@@ -1,0 +1,21 @@
+﻿@page
+@model AngularApplication.MyFeature.Pages.AngularApplicationModel
+
+@{
+    ViewData["Title"] = "Angular Application";
+    ViewData["BaseRef"] = "Angular";
+
+    Layout = "_Layout";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="/_content/AngularApplication/styles.css">
+}
+@section Scripts
+    {
+    <script src="/_content/AngularApplication/runtime.js" type="module"></script>
+    <script src="/_content/AngularApplication/polyfills.js" type="module"></script>
+    <script src="/_content/AngularApplication/main.js" type="module"></script>
+}
+
+<app-root></app-root>
