@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor" InitialTargets="BuildUI">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <Target Name="BuildUI" Condition="('$(Configuration)'!='Debug' Or !Exists('wwwroot\bundle.js')) And ('$(NoBuild)' != 'true') ">
+    <Exec WorkingDirectory="./" Command="npm install" />
+    <Exec WorkingDirectory="./" Command="npm run build" />
+   </Target>
+
+</Project>
