@@ -10,6 +10,11 @@
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <PackageReference Include="Moryx" Version="8.*-*" />
+  </ItemGroup>
+
   <Target Name="BuildUI" Condition="('$(Configuration)'!='Debug' Or !Exists('wwwroot\bundle.js')) And ('$(NoBuild)' != 'true') ">
     <Exec WorkingDirectory="./" Command="npm install" />
     <Exec WorkingDirectory="./" Command="npm run build" />

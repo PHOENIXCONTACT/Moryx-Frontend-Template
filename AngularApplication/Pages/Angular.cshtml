@@ -1,4 +1,7 @@
 ﻿@page
+@using Microsoft.AspNetCore.Authorization
+@using Moryx.Asp.Integration
+@using System.ComponentModel.DataAnnotations
 @model AngularApplication.MyFeature.Pages.AngularApplicationModel
 
 @{
@@ -7,6 +10,9 @@
 
     Layout = "_Layout";
 }
+@attribute [WebModule("Angular", "calendar_month"),
+  Display(Name = "Angular Title", Description = "Description is here"),
+    AllowAnonymous]
 
 @section Styles {
     <link rel="stylesheet" href="/_content/AngularApplication/styles.css">

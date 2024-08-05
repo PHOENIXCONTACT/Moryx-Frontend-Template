@@ -10,6 +10,10 @@
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Moryx" Version="8.*-*" />
+  </ItemGroup>
+
   <Target Name="BuildUI" Condition="('$(Configuration)'!='Debug' Or !Exists('wwwroot\main.js')) And ('$(NoBuild)' != 'true') ">
     <Exec WorkingDirectory="./" Command="npm install" />
     <Exec WorkingDirectory="./" Command="ng build --delete-output-path --configuration production --progress false" />
