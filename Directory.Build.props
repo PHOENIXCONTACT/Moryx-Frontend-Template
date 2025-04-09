@@ -1,0 +1,45 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://git-go.europe.phoenixcontact.com/moryx/applications/moryx-demo</RepositoryUrl>
+    <!-- Makes sure the correct url is set for forks -->
+    <RepositoryUrl Condition="'$(CI_PROJECT_URL)'!=''">$(CI_PROJECT_URL)</RepositoryUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <DebugType>embedded</DebugType>
+    <IsPackable>false</IsPackable>
+    <WarnOnPackingNonPackableProject>true</WarnOnPackingNonPackableProject>
+    <WarningLevel>3</WarningLevel>
+  </PropertyGroup>
+  <!-- Set default for the PackageIcon to an icon.png if it exists in the root of the project -->
+  <PropertyGroup>
+    <PackageIconSource Condition="'$(PackageIconSource)'=='' And Exists('$(MSBuildThisFileDirectory)\icon.png')">$(MSBuildThisFileDirectory)\icon.png</PackageIconSource>
+    <PackageIcon Condition="'$(PackageIcon)'=='' And '$(PackageIconSource)'!='' And Exists('$(PackageIconSource)')">icon.png</PackageIcon>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(PackageIconSource)'!='' And Exists('$(PackageIconSource)')">
+    <None Include="$(PackageIconSource)" Pack="true" PackagePath="icon.png" />
+  </ItemGroup>
+  <PropertyGroup>
+    <!-- Mark unspecified versions for nuget packages as errors -->
+    <WarningsAsErrors>$(WarningsAsErrors);NU1605;NU1604</WarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Include Nerdbank.GitVersioning for generating package versions. -->
+    <PackageReference Include="Nerdbank.GitVersioning" Condition="'$(GITHUB_RUN_ID)' == ''">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="JunitXml.TestLogger" Condition="'$(IsTestProject)' == 'True'">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
+  </PropertyGroup>
+  <PropertyGroup>
+    <MoryxVersion>8.*</MoryxVersion>
+    <MoryxShiftsVersion>8.0.0-beta-g81661b8341</MoryxShiftsVersion>
+    <MoryxOperatorsVersion>8.0.0-beta-geb3a23cb50</MoryxOperatorsVersion>
+  </PropertyGroup>
+</Project>

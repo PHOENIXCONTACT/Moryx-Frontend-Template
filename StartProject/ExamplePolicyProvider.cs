@@ -1,0 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Options;
+using System.Threading.Tasks;
+
+namespace StartProject;
+
+internal class ExamplePolicyProvider(IOptions<AuthorizationOptions> options) : DefaultAuthorizationPolicyProvider(options)
+{
+    public override async Task<AuthorizationPolicy> GetPolicyAsync(string policyName) => await base.GetPolicyAsync(policyName) ??
+            new AuthorizationPolicyBuilder().RequireClaim("Permission", policyName).Build();
+}
